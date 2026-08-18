@@ -1,0 +1,345 @@
+---
+title: "AI & ML"
+toc: true
+toc-location: right
+toc-depth: 3
+number-sections: true
+smooth-scroll: true
+format:
+  html: default
+  pdf:
+    documentclass: scrartcl
+    papersize: a4
+    fontsize: 11pt
+    number-sections: true
+    toc: true
+    lang: de
+    colorlinks: true
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+---
+
+# Arbeitsauftrag: Artikel verstehen
+
+In diesem ersten Thema zu **AI & ML** arbeiten Sie mit einem aktuellen Artikel über **LLMs** (Large Language Models) und ein konkretes Sicherheitsproblem in der Softwareentwicklung.
+
+Der Artikel behandelt die Frage, wie KI-Systeme Softwarepakete "erfinden" können, die gar nicht existieren, und warum daraus echte Sicherheitsrisiken entstehen können.
+
+## Material
+
+- Artikel: [Package Hallucinations: How LLMs Can Invent Vulnerabilities](materials/package-hallucinations-usenix.pdf)
+<!-- - Download: [PDF herunterladen](materials/package-hallucinations-usenix.pdf) -->
+
+## Ziel
+
+Am Schluss sollen Sie **in eigenen Worten erklären können, worum es im Artikel geht**.
+
+Sie müssen nicht jedes Detail verstehen. Wichtig ist, dass Sie die **Hauptaussage**, das **Problem** und die **Bedeutung** des Artikels nachvollziehen können.
+
+## Arbeitsauftrag
+
+::: {.callout-note icon=false}
+## Phase 1: Lesen oder zusammenfassen lassen (20 Minuten)
+
+Lesen Sie den Artikel aufmerksam.
+
+Falls der Originaltext für Sie zu dicht ist, dürfen Sie sich den Artikel auch mit einem KI-Tool oder einem anderen Hilfsmittel **zusammenfassen lassen**. Ziel bleibt aber, dass Sie **selbst verstehen**, worum es geht.
+
+Während dem Lesen:
+
+- Notieren Sie Begriffe, die Sie nicht verstehen.
+- Markieren Sie Stellen, die Sie wichtig finden.
+- Halten Sie in 2 bis 4 Stichworten fest, worum es im Artikel insgesamt geht.
+:::
+
+::: {.callout-important icon=false}
+## Phase 2: Begriffe klären und Inhalt verstehen (20 Minuten)
+
+Arbeiten Sie nun mit Ihren Notizen weiter.
+
+- Suchen Sie unbekannte Begriffe selbst nach.
+- Schreiben Sie zu jedem unklaren Begriff eine kurze Erklärung in eigenen Worten auf.
+- Versuchen Sie anschliessend zusammenzufassen:
+  - Was ist das zentrale Problem?
+  - Wie entsteht dieses Problem?
+  - Warum ist es für Entwicklerinnen und Entwickler relevant?
+:::
+
+::: {.callout-tip icon=false}
+## Phase 3: Austausch zu zweit (5 Minuten)
+
+Besprechen Sie den Artikel kurz mit einer Mitschülerin oder einem Mitschüler.
+
+Sprechen Sie dabei mindestens über diese zwei Punkte:
+
+- Was ist Ihrer Meinung nach die wichtigste Aussage des Artikels?
+- Welcher Begriff oder Gedanke war am schwierigsten zu verstehen?
+:::
+
+## Ergebnis
+
+Am Ende der Arbeitszeit sollen Sie Folgendes vorliegen haben:
+
+- Eine Liste mit unbekannten Begriffen und Ihren Erklärungen.
+- Eine kurze Zusammenfassung in eigenen Worten.
+- Eine Antwort auf die Frage: **Warum ist das Thema für den Umgang mit KI-Tools relevant?**
+
+## Leitfragen
+
+Nutzen Sie diese Fragen als Orientierung:
+
+1. Was bedeutet in diesem Zusammenhang eine "Halluzination" eines LLMs?
+2. Was ist mit einem "Package Hallucination" gemeint?
+3. Weshalb kann daraus ein Sicherheitsproblem entstehen?
+
+## Hinweis
+
+Wenn Sie beim Lesen auf viele unbekannte Begriffe stossen, ist das normal. Genau darum geht es in diesem Auftrag: **Begriffe erkennen, selbstständig klären und dadurch ein komplexes Thema Schritt für Schritt verstehen.**
+
+# KI und Verantwortung: Expertenpuzzle
+
+In dieser Lektion befassen wir uns mit realen Schadensfällen, bei denen KI-Systeme zu Problemen geführt haben. Jede Gruppe liest einen anderen Artikel. Am Ende werden die Erkenntnisse aller Gruppen zusammengeführt.
+
+## Methode: Expertenpuzzle
+
+Das Expertenpuzzle läuft in zwei Phasen ab:
+
+1. **Expertengruppen (20 Minuten):** Alle, die denselben Artikel haben, lesen und besprechen ihn gemeinsam. Ziel ist, den eigenen Fall so gut zu verstehen, dass Sie ihn anderen erklären können.
+
+2. **Gemischte Gruppen (15 Minuten):** Sie werden in neue Gruppen aufgeteilt, in denen jede Person einen anderen Artikel gelesen hat. Jede Person stellt ihren Fall kurz vor und gemeinsam diskutiert die Gruppe die Leitfragen.
+
+## Artikel-Zuteilung
+
+Jeder Person wird **ein** Artikel zugeteilt. Schauen Sie, welche Gruppe Ihnen zugewiesen wurde:
+
+| Gruppe | Artikel | Download |
+|--------|---------|----------|
+| **A** | Air Canada: Chatbot gibt falsche Auskunft | [PDF](materials/air-canada-chatbot.pdf) |
+| **B** | UnitedHealth: KI verweigert Pflegeleistungen | [PDF](materials/unitedhealth-ai-denial.pdf) |
+| **C** | Character.AI: Chatbot und Suizid eines Jugendlichen | [PDF](materials/character-ai-suicide.pdf) |
+| **D** | Tesla Autopilot: Tödlicher Unfall, Jury spricht Entschädigung zu | [PDF](materials/tesla-autopilot-crash.pdf) |
+| **E** | Gesichtserkennung: Unschuldiger Mensch verhaftet | [PDF](materials/face-recognition-arrest.pdf) |
+
+::: {.callout-warning icon=false}
+## Hinweis zu Artikel C
+
+Der Artikel über Character.AI behandelt den Freitod eines 14-jährigen Jugendlichen. Der Fall wird im Unterricht sachlich und respektvoll behandelt.
+:::
+
+## Phase 1: Expertengruppe (20 Minuten)
+
+::: {.callout-note icon=false}
+## Arbeitsauftrag Expertengruppe
+
+1. Lesen Sie Ihren Artikel **einzeln** durch. (ca. 10 Minuten)
+2. Besprechen Sie ihn anschliessend mit den Personen, die **denselben Artikel** haben. (ca. 10 Minuten)
+
+Halten Sie gemeinsam fest:
+
+- **Was ist passiert?** Beschreiben Sie den Fall in 2–3 Sätzen.
+- **Welche Rolle spielte die KI?** Was hat das System getan oder nicht getan?
+- **Was waren die Folgen?** Für wen, und wie schwerwiegend?
+- **Wer trägt Ihrer Meinung nach Verantwortung?** Begründen Sie kurz.
+
+Bereiten Sie sich darauf vor, Ihren Fall in der gemischten Gruppe in **2–3 Minuten** vorzustellen.
+:::
+
+## Phase 2: Gemischte Expertengruppen (15 Minuten)
+
+::: {.callout-important icon=false}
+## Arbeitsauftrag gemischte Gruppe
+
+Jede Person in der Gruppe hat einen anderen Artikel gelesen. Gehen Sie so vor:
+
+1. Jede Person stellt ihren Fall kurz vor. (je ca. 1–2 Minuten)
+2. Diskutieren Sie gemeinsam die Leitfragen unten — und beziehen Sie dabei **alle Fälle** mit ein.
+:::
+
+## Leitfragen
+
+Die folgenden Fragen gelten für alle Artikel. Versuchen Sie, bei jeder Antwort auf **mehrere** der Fälle einzugehen:
+
+1. In allen Fällen hat ein KI-System versagt oder Schaden verursacht. Was haben die Fälle gemeinsam?
+2. Wer ist in diesen Fällen jeweils verantwortlich: das Unternehmen, die Technologie, die Nutzerinnen und Nutzer, oder jemand anderes?
+3. Hätte der Schaden verhindert werden können? Wenn ja, wie?
+4. Vertrauen Sie KI-Systemen nach dem Lesen dieser Artikel mehr oder weniger als zuvor? Warum?
+5. Sollten KI-Systeme stärker reguliert werden? Wenn ja, wer sollte die Regeln festlegen und durchsetzen?
+
+# Teachable Machine: Ein Modell selbst trainieren
+
+In diesem Kapitel trainieren Sie selbst ein einfaches Bildklassifikationsmodell mit **Google Teachable Machine** – ohne Programmieren.
+
+## Was ist Teachable Machine?
+
+[Teachable Machine](https://teachablemachine.withgoogle.com/) ist ein webbasiertes Tool von Google, mit dem Sie ein Machine-Learning-Modell durch eigene Beispielbilder trainieren können. Das Tool läuft direkt im Browser – keine Installation nötig.
+
+## Aufgabe 1: Erstes Modell trainieren
+
+::: {.callout-note icon=false}
+## Schritt-für-Schritt
+
+1. Öffnen Sie [teachablemachine.withgoogle.com](https://teachablemachine.withgoogle.com/) und wählen Sie **«Get Started»** → **«Image Project»** → **«Standard image model»**.
+2. Erstellen Sie **zwei Klassen** mit aussagekräftigen Namen (z. B. zwei verschiedene Gesten, Objekte oder Personen).
+3. Nehmen Sie für jede Klasse mindestens **30 Bilder** mit der Webcam auf.
+4. Klicken Sie auf **«Train Model»** und warten Sie, bis das Training abgeschlossen ist.
+5. Testen Sie Ihr Modell live mit der Webcam im Vorschau-Bereich.
+:::
+
+## Aufgabe 2: Fehlerrate bestimmen
+
+Jetzt messen Sie, wie gut Ihr Modell wirklich ist.
+
+::: {.callout-important icon=false}
+## Auftrag
+
+1. Führen Sie **10 Testdurchläufe** durch: Zeigen Sie dem Modell abwechselnd ein Beispiel aus Klasse 1 und Klasse 2.
+2. Notieren Sie für jeden Versuch, ob das Modell **richtig oder falsch** klassifiziert hat.
+3. Berechnen Sie die Fehlerrate:
+
+$$\text{Fehlerrate} = \frac{\text{Anzahl falscher Vorhersagen}}{\text{Gesamtanzahl Versuche}} \times 100\%$$
+
+4. Notieren Sie sich Begründungen für die Fehler und für die tiefe Fehlerrate.
+
+:::
+
+## Aufgabe 3: Konzeptuelle Fragen
+
+Beantworten Sie die folgenden Fragen **schriftlich**, bevor Sie weitermachen. Besprechen Sie Ihre Antworten kurz mit einer Mitschülerin oder einem Mitschüler.
+
+1. Was genau hat das Modell beim Training «gelernt»? Beschreiben Sie es in eigenen Worten.
+2. Warum braucht das Modell mehrere Beispielbilder pro Klasse – würde eines nicht reichen?
+3. Was könnte passieren, wenn alle Bilder einer Klasse unter denselben Bedingungen aufgenommen wurden?
+
+## Aufgabe 4: Grenzen des Modells finden
+
+::: {.callout-note icon=false}
+## Auftrag
+
+Versuchen Sie, Ihr Modell zum Scheitern zu bringen. Testen Sie verschiedene Situationen und notieren Sie, wann das Modell **falsch oder unsicher** reagiert.
+
+Ideen zum Ausprobieren:
+
+- Verändern Sie den **Hintergrund** oder die **Beleuchtung**.
+- Zeigen Sie das Beispiel aus einem anderen **Winkel** oder in einer anderen **Entfernung**.
+- Zeigen Sie etwas, das **keiner der beiden Klassen** angehört.
+
+**Dokumentieren Sie mindestens 3 Situationen**, in denen das Modell versagt oder stark unsicher wird. Beschreiben Sie jeweils, was Sie gezeigt haben und wie das Modell reagiert hat.
+:::
+
+::: {.callout-tip icon=false}
+## Reflexionsfrage
+
+Warum versagt das Modell in den Situationen, die Sie gefunden haben? Was fehlt ihm?
+:::
+
+## Aufgabe 5: Modell verbessern
+
+Sie haben Schwächen gefunden. Jetzt versuchen Sie, das Modell robuster zu machen – aber **wie**, entscheiden Sie selbst.
+
+::: {.callout-important icon=false}
+## Auftrag
+
+Wählen Sie **eine** der folgenden Strategien (oder kombinieren Sie beide) und setzen Sie diese um:
+
+- **Strategie A:** Fügen Sie **neue, vielfältigere Bilder** zu Ihren bestehenden Klassen hinzu (z. B. andere Beleuchtung, anderer Hintergrund, andere Personen).
+- **Strategie B:** Fügen Sie eine **dritte Klasse** hinzu, die die problematischen Fälle aus Aufgabe 4 abdeckt.
+
+Trainieren Sie das Modell neu und messen Sie die Fehlerrate erneut mit den gleichen 20 Testfällen wie zuvor.
+
+**Fragen zum Nachdenken:**
+
+1. Hat sich die Fehlerrate verbessert? Um wie viel?
+2. Was hat Ihre Strategie bewirkt – was hat das Modell dadurch «dazugelernt»?
+3. Welche Strategie war effektiver, und warum könnte das so sein?
+:::
+
+## Ergebnis
+
+Am Ende dieses Kapitels sollen Sie Folgendes vorliegen haben:
+
+- Ein trainiertes Modell mit mindestens zwei Klassen.
+- Eine dokumentierte Fehlerrate (vor und nach der Verbesserung).
+- Schriftliche Antworten auf die Konzeptfragen in Aufgabe 3.
+- Eine Liste von mindestens 3 Grenzsituationen und eine Erklärung, warum das Modell dort versagt.
+
+## Auswertung: Was die Klasse beobachtet hat
+
+Auf den folgenden Seiten sehen Sie, was Schülerinnen und Schüler aus verschiedenen Klassen beim Experimentieren mit Teachable Machine beobachtet haben – und wie ihre Beobachtungen mit Konzepten aus der modernen ML-Forschung zusammenhängen.
+
+### Fehlerraten im Überblick
+
+Die Fehlerraten lagen je nach Klasse und Modell in einem breiten Bereich:
+
+| Klasse | Bereich der Fehlerraten | Häufigster Wert |
+|--------|------------------------|-----------------|
+| 28Mc | 0 % – 56 % | 30–40 % |
+| 28Mb | 0 % – 50 % | 10–40 % |
+| 28Md | 0 % – 70 % | 20–50 % |
+
+Nach dem Verbessern der Modelle sanken die Fehlerraten bei fast allen, die eine Strategie angewendet hatten.
+
+
+### Was die SuS beobachtet haben – und wie es in der ML-Forschung heisst
+
+Viele der Probleme, die Sie selbst entdeckt haben, sind aktive Forschungsfelder. Die folgende Tabelle zeigt den Zusammenhang:
+
+| Beobachtung | ML-Begriff | Erklärung |
+|-------------|------------|-----------|
+| «Das Modell erkennt den Hintergrund, nicht das Objekt» | **Spurious Correlation / Background Bias** | Das Modell lernt Merkmale, die mit dem Zielobjekt *korrelieren*, aber das Objekt selbst nicht beschreiben. Der Hintergrund ist ein klassisches Beispiel. |
+| «Bei einem anderen Winkel funktioniert es nicht mehr» | **Mangelnde Datenvielfalt** | Das Modell hat nur eine Perspektive gelernt. Es fehlt *Data Diversity*. |
+| «Die Farben sind zu ähnlich» | **Geringe Interklassen-Varianz** | Wenn sich zwei Klassen optisch stark ähneln, hat das Modell wenig Signal zur Unterscheidung. |
+| «Die Hand wird als Klassenmerkmal erkannt, nicht das Objekt» | **Konfundierender Faktor** | Ein Merkmal (die Hand), das nicht zur Klasse gehört, wird als Klassenmerkmal gelernt, weil es in allen Trainingsbildern einer Klasse vorkommt. |
+| «Aus grosser Distanz funktioniert es nicht» | **Fehlende Skaleninvarianz** | Das Modell wurde nicht mit Objekten in verschiedenen Grössen trainiert. |
+| «Wenn ich nichts halte, versucht es trotzdem etwas zuzuordnen» | **Closed-Set Classification** | Das Modell kann immer nur eine der gelernten Klassen ausgeben – es gibt kein «Nichts davon». In der ML-Praxis löst man das mit einer *Rejection Class* oder *Out-of-Distribution Detection*. |
+| «Mit wenigen Bildern war es sehr ungenau» | **Data Scarcity** | Zu wenige Beispiele bedeutet, dass das Modell keine robusten Merkmale lernen kann. |
+| «Wenn ein Teil verdeckt ist, erkennt es das Objekt nicht» | **Okklusionssensitivität** | Das Modell hat nur vollständige Objekte gesehen und kennt partielle Ansichten nicht. |
+| «Bei anderem Licht funktioniert es schlechter» | **Domain Shift** | Die Bedingungen beim Testen weichen von den Trainingsbedingungen ab. |
+| «Ähnliche Objekte einer anderen Klasse werden fälschlich erkannt» | **False Positive / Klassenüberschneidung** | Das Modell generalisiert zu stark und überträgt Klassen auf visuell ähnliche, aber andere Objekte. |
+
+### Was geholfen hat – und warum
+
+| Strategie | ML-Begriff | Wirkung |
+|-----------|------------|---------|
+| Mehr Bilder aufnehmen | **Erhöhung der Trainingsdatenmenge** | Hilft – aber **nur**, wenn die neuen Bilder auch mehr Vielfalt bringen. Mehr Bilder unter gleichen Bedingungen helfen kaum. |
+| Bilder aus verschiedenen Winkeln aufnehmen | **Data Augmentation / Datenvielfalt** | Direkte Verbesserung der Robustheit gegenüber Perspektivwechseln. |
+| Verschiedene Hintergründe verwenden | **Hintergrundvariation** | Reduziert Background Bias – das Modell lernt, sich auf das Objekt zu fokussieren. |
+| Einheitlichen Hintergrund verwenden | **Kontrollierte Trainingsbedingungen** | Senkt die Fehlerrate unter gleichen Bedingungen stark – erhöht aber die Empfindlichkeit gegenüber anderem Hintergrund. Tradeoff! |
+| Klasse «Nichts» / Fehlersituationen hinzufügen | **Rejection Class / Negative Class** | Konkrete ML-Lösung für das Closed-Set-Problem. |
+| Objekt auf dem Tisch statt in der Hand trainieren | **Reduktion konfundierender Merkmale** | Entfernt die Hand als störenden Faktor aus dem Trainingssignal. |
+
+### Kernaussagen
+
+::: {.callout-important icon=false}
+## Das Modell lernt, was in den Bildern vorhanden ist – nicht, was wir meinen
+
+Hintergrund, Hand, Licht: alles kann als Klassenmerkmal gelernt werden. Das Modell «weiss» nicht, was ein Objekt ist – es erkennt Muster.
+:::
+
+::: {.callout-important icon=false}
+## Mehr Daten helfen nur, wenn sie vielfältiger sind
+
+Wiederholte Bilder unter gleichen Bedingungen bringen wenig. Abwechslung in Winkel, Licht, Hintergrund und Position ist entscheidend.
+:::
+
+::: {.callout-important icon=false}
+## Kein Modell kann sagen: «Das kenne ich nicht»
+
+Solange keine Ablehnungsklasse trainiert wird, zwingt das Modell jeden Input in eine der gelernten Klassen – auch wenn der Input völlig unbekannt ist.
+:::
+
+::: {.callout-important icon=false}
+## Die Bedingungen beim Testen sollten den Trainingsbedingungen ähneln
+
+Wenn nicht, spricht man von *Domain Shift* – einem der häufigsten Probleme in realen ML-Systemen.
+:::
+
+::: {.callout-tip icon=false}
+## Das haben Sie selbst entdeckt
+
+Background Bias, Confounding Variables, Closed-Set Classification – das sind aktive Forschungsfelder der KI. Viele von Ihnen sind beim Experimentieren auf Probleme gestossen, über die Forscherinnen und Forscher seit Jahrzehnten nachdenken.
+:::
+
+
+{{< include linear-regression.qmd >}}

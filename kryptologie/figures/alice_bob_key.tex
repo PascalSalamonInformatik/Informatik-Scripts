@@ -1,0 +1,96 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[default]{sourcesanspro}
+\usepackage{tikz}
+\usepackage{fontawesome}
+\usepackage{xcolor}
+\definecolor{RoyalBlue}{RGB}{65,105,225}
+\definecolor{ForestGreen}{RGB}{34,139,34}
+\definecolor{DarkRed}{RGB}{180,30,30}
+\usetikzlibrary{positioning, arrows.meta, decorations.pathmorphing, calc}
+
+\begin{document}
+\begin{tikzpicture}[
+    auto,
+    person/.style={
+        minimum width=2cm,
+        minimum height=1.2cm,
+        rectangle,
+        fill=#1!20,
+        draw=#1!60,
+        align=center,
+        rounded corners,
+        font=\large
+    },
+    process/.style={
+        minimum width=2.8cm,
+        minimum height=1.2cm,
+        rectangle,
+        fill=RoyalBlue!15,
+        draw=RoyalBlue!60,
+        align=center,
+        rounded corners,
+        font=\small
+    },
+    msg/.style={
+        minimum width=2cm,
+        minimum height=0.8cm,
+        rectangle,
+        fill=ForestGreen!15,
+        draw=ForestGreen!60,
+        align=center,
+        rounded corners,
+        font=\small
+    },
+    arr/.style={-{Stealth[length=8pt]}, line width=1pt, ForestGreen!70},
+    dasharr/.style={-{Stealth[length=6pt]}, line width=0.8pt, dashed, RoyalBlue!60},
+    wiggly/.style={decorate, decoration={snake, amplitude=1.5pt, segment length=8pt}}
+]
+
+    % Alice
+    \node[person=RoyalBlue] (alice) {\faFemale\ Alice};
+
+    % Nachricht
+    \node[msg, below=0.8cm of alice] (msg1) {\faEnvelope\ Nachricht};
+
+    % Verschlüsselung
+    \node[process, right=2.5cm of msg1] (encrypt) {\faLock\ Verschlüsseln\\mit Schlüssel $k$};
+
+    % Schlüssel
+    \node[above=0.5cm of encrypt, font=\large, RoyalBlue] (key) {\faKey\ $k$};
+
+    % Chiffretext
+    \node[msg, right=2.5cm of encrypt] (cipher) {\faLock\ Chiffretext};
+
+    % Bob
+    \node[person=ForestGreen, above=0.8cm of cipher] (bob) {\faMale\ Bob};
+
+    % Entschlüsselung (bei Bob)
+    \node[process, below=0.8cm of cipher] (decrypt) {\faUnlock\ Entschlüsseln\\mit Schlüssel $k$};
+
+    % Schlüssel bei Bob
+    \node[right=0.5cm of decrypt, font=\large, RoyalBlue] (key2) {\faKey\ $k$};
+
+    % Nachricht bei Bob
+    \node[msg, below=0.8cm of decrypt] (msg2) {\faEnvelope\ Nachricht};
+
+    % Charlie (Angreifer)
+    \node[person=DarkRed, below=1.5cm of encrypt] (charlie) {\faMale\ Charlie};
+
+    % Pfeile
+    \draw[arr] (msg1) -- (encrypt);
+    \draw[dasharr] (key) -- (encrypt);
+    \draw[arr] (encrypt) -- (cipher);
+    \draw[arr] (cipher) -- (decrypt);
+    \draw[dasharr] (key2) -- (decrypt);
+    \draw[arr] (decrypt) -- (msg2);
+
+    % Charlie versucht mitzulesen
+    \draw[DarkRed!70, dashed, line width=0.8pt, -{Stealth[length=6pt]}]
+        (charlie.north) -- node[right, font=\small\color{DarkRed}]{\faEyeSlash\ kann nicht lesen} ($(encrypt.south)!0.5!(cipher.south) + (0,-0.3)$);
+
+    % Unsicherer Kanal Beschriftung
+    \node[above=0.3cm of encrypt, xshift=2.8cm, font=\footnotesize\itshape, gray] {unsicherer Kanal};
+
+\end{tikzpicture}
+\end{document}

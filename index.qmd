@@ -1,0 +1,32 @@
+---
+title: "Informatik Skripte"
+subtitle: "Lehrmaterialien & Referenzen"
+toc: false
+---
+
+Willkommen zur Sammlung von Informatik-Skripten. Wählen Sie ein Thema oben aus, um auf die entsprechenden Materialien zuzugreifen.
+
+<!-- ## Themen
+
+::: {.grid}
+
+::: {.g-col-6}
+### [AI & ML](ai-ml/index.qmd)
+Arbeitsauftrag zu einem aktuellen Artikel uber KI, LLMs und Sicherheitsrisiken in der Softwareentwicklung.
+:::
+
+::: {.g-col-6}
+### [Netzwerke](networking/index.qmd)
+Computer-Netzwerke — OSI-Modell, Protokolle, IP-Adressierung, Routing und mehr.
+:::
+
+::: {.g-col-6}
+### [Pygame](pygame/index.qmd)
+Spieleprogrammierung mit Python und Pygame — Game-Schleife, Bewegung, Kollisionen und mehr.
+:::
+
+:::
+
+---
+
+*Weitere Themen werden im Laufe der Zeit hinzugefügt.* -->

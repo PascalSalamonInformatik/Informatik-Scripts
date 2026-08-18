@@ -1,0 +1,25 @@
+/.quarto/
+/docs/
+*.html
+!_quarto.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+*.swp
+*.swo
+
+**/*.quarto_ipynb
+
+*.txt

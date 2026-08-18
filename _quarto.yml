@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Informatik Skripte"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: ai-ml/index.qmd
+        text: AI & ML
+      - href: networking/index.qmd
+        text: Netzwerke
+      - href: pygame/index.qmd
+        text: Pygame
+      - href: kryptologie/index.qmd
+        text: Kryptologie
+  page-footer:
+    center: "Informatik Skripte — Built with [Quarto](https://quarto.org)"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    number-sections: true
+    smooth-scroll: true
+    code-fold: true
+    code-tools: true
+    highlight-style: github

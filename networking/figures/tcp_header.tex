@@ -1,0 +1,22 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[default]{sourcesanspro}
+\usepackage[table]{xcolor}
+\definecolor{Indigo}{RGB}{75,0,130}
+\definecolor{orange}{RGB}{255,165,0}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{booktabs}
+
+\begin{document}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{4cm}}
+
+		\rowcolor{Indigo!30}\multicolumn{2}{c}{\textbf{TCP Header}}       \\ \midrule\midrule
+		\rowcolor{Indigo!15}Source Port & Destination Port                      \\ \midrule
+		\rowcolor{Indigo!15}\multicolumn{2}{c}{Sequence \# (SEQ)}               \\ \midrule
+		\rowcolor{Indigo!15}\multicolumn{2}{c}{Acknowledgement \# (ACK)}        \\ \midrule
+		\rowcolor{Indigo!15}\multicolumn{2}{c}{Weitere TCP-Header-Felder} \\ \midrule
+		\rowcolor{orange!30}\multicolumn{2}{c}{\textbf{Nutzdaten}}                            \\ \midrule\midrule
+		\rowcolor{orange!15}\multicolumn{2}{c}{$\ldots$ Anwendungsdaten $\ldots$}             \\
+	\end{tabular}
+\end{document}

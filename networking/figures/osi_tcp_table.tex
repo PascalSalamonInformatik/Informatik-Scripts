@@ -1,0 +1,25 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[default]{sourcesanspro}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{booktabs}
+
+% Layer colors (RGB, no named colors)
+\definecolor{applicationLayerColor}{RGB}{255,215,0}
+\definecolor{transportLayerColor}{RGB}{75,0,130}
+\definecolor{networkLayerColor}{RGB}{65,105,225}
+\definecolor{dataLinkLayerColor}{RGB}{128,128,128}
+
+\begin{document}
+\begin{tabular}{c|m{2.6cm}||m{2cm}||m{4.6cm}|m{2.5cm}|m{2cm}}
+		\textbf{\#}              & \textbf{Schicht (OSI)}                     & \textbf{Schicht \newline (TCP / IP)}  & \textbf{Aufgabe}                                                                                                & \textbf{Informations\-form}               & \textbf{Begriffe / \newline \underline{Protokolle}}   \\ \midrule\midrule
+		\rowcolor{applicationLayerColor!10}7    & Anwendung \newline \textit{Application}    & Anwendung\newline\textit{Application} & Hilft bei der Identifizierung des Clients und synchronisiert die Kommunikation.                                 & Nachricht                                 & \underline{HTTP}, \underline{HTTPS}, \underline{DNS}, \underline{SMTP}, \underline{FTP}...        \\\midrule
+		\rowcolor{applicationLayerColor!20}6    & Darstellung \newline \textit{Presentation} & Anwendung\newline\textit{Application} & Daten von der Anwendungsschicht werden extrahiert und f\"ur die \"Ubertragung in das erforderliche Format gebracht. & Nachricht                                 & \underline{TLS}, \underline{SSL}, ASCII, UTF-8, ...      \\\midrule
+		\rowcolor{yellow!30}5    & Sitzung \newline \textit{Session}          & Anwendung\newline\textit{Application} & Stellt Verbindung her, h\"alt diese aufrecht, gew\"ahrleistet Authentifizierung und sichert die Sicherheit.         & Nachricht (oder verschl\"usselte Nachricht) & \underline{TLS} Handshake           \\\midrule
+		\rowcolor{transportLayerColor!20}4    & Transport\newline \textit{Transport}       & Transport\newline\textit{Transport}   & Nimmt Dienst von der Vermittlungsschicht und stellt ihn der Anwendungsschicht zur Verf\"ugung.                    & Segment                                   & \underline{TCP}, \underline{UDP}, Ports... \\\midrule
+		\rowcolor{networkLayerColor!20}3 & Vermittlung \newline \textit{Network}      & Internet\newline\textit{Internet}     & \"Ubertragung von Daten von einem Host zu einem anderen, der sich in unterschiedlichen Netzwerken befindet.       & Paket                                     & \underline{IPv4}, \underline{IPv6}, \underline{ICMP}, Router, Gateway   \\\midrule
+		\rowcolor{dataLinkLayerColor!30}2      & Sicherung \newline \textit{Data Link}      & Netzzugriff\newline\textit{Data Link} & \"Ubermittlung von Nachrichten von Knoten zu Knoten.                                                              & Frame                                     & \underline{ARP}, MAC, Switch, Bridge, Ethernet, WiFi, ...      \\\midrule
+		\rowcolor{dataLinkLayerColor!15}1      & Bit\"ubertragung \newline \textit{Physical}  & Netzzugriff\newline\textit{Data Link} & Herstellung physischer Verbindungen zwischen Ger\"aten.                                                           & Bits                                      & Hub, Repeater, Modem, Kabel...        \\
+	\end{tabular}
+\end{document}

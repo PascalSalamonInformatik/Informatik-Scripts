@@ -1,0 +1,205 @@
+---
+toc: true
+toc-location: right
+toc-depth: 3
+number-sections: true
+smooth-scroll: true
+format:
+  html: default
+  pdf:
+    documentclass: scrartcl
+    papersize: a4
+    fontsize: 11pt
+    number-sections: false
+    toc: false
+    lang: de
+    colorlinks: true
+    filters:
+      - remove_title.lua
+---
+
+# Verschlüsseln mit XOR
+
+Mit dem Diffie-Hellman-Verfahren können sich Alice und Bob über einen abgehörten Kanal auf einen gemeinsamen geheimen Schlüssel $s$ einigen. Was bisher fehlt: eine **Verschlüsselung**, die diesen Schlüssel auch benutzt. Genau das holen wir jetzt nach — mit einer Operation, die jeder Computer milliardenfach pro Sekunde ausführt: **XOR**.
+
+## Was ist XOR?
+
+XOR («exklusives Oder», Symbol $\oplus$) verknüpft zwei **Bits**. Das Ergebnis ist $1$, wenn die beiden Bits **verschieden** sind, und $0$, wenn sie **gleich** sind. Zum Vergleich daneben das logische **Und** ($\wedge$, nur $1$ wenn *beide* $1$ sind) und das logische **Oder** ($\vee$, $1$ wenn *mindestens eines* $1$ ist):
+
+::: {layout-ncol=3}
+| $a$ | $b$ | $a \wedge b$ |
+|:---:|:---:|:---:|
+| 0 | 0 | 0 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
+
+: Und (AND)
+
+| $a$ | $b$ | $a \vee b$ |
+|:---:|:---:|:---:|
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 1 |
+
+: Oder (OR)
+
+| $a$ | $b$ | $a \oplus b$ |
+|:---:|:---:|:---:|
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+
+: XOR ($\oplus$)
+:::
+
+Längere Zahlen werden **bitweise** XOR-verknüpft — Stelle für Stelle, ohne Übertrag:
+
+$$
+\begin{array}{r}
+  1011\,0010 \\
+  \oplus\quad 0110\,1101 \\
+  \hline
+  1101\,1111
+\end{array}
+$$
+
+::: {.callout-note title="Aufgabe 16: XOR von Hand" icon=true}
+a) Berechnen Sie bitweise:
+
+$$1100\,1010 \;\oplus\; 0101\,0110 \;=\; \underline{\phantom{00000000}}$$
+
+b) Berechnen Sie $\mathtt{0x6A} \oplus \mathtt{0x3F}$. Schreiben Sie dazu **beide Hex-Zahlen zuerst als 8 Bits** auf, verknüpfen Sie bitweise und geben Sie das Ergebnis wieder in Hex an.
+
+*Erinnerung: Eine Hex-Ziffer entspricht 4 Bits.*
+:::
+
+::: {.callout-note title="Aufgabe 17: XOR mit ASCII-Buchstaben" icon=true}
+Jeder Buchstabe wird im Computer als ein **Byte** (8 Bits) gespeichert. Hier die ASCII-Codes, die Sie brauchen:
+
+| Zeichen | Dezimal | Hex | Binär |
+|:---:|:---:|:---:|:---:|
+| `H` | 72 | 0x48 | 0100 1000 |
+| `i` | 105 | 0x69 | 0110 1001 |
+| `L` | 76 | 0x4C | 0100 1100 |
+| `o` | 111 | 0x6F | 0110 1111 |
+
+Verschlüsseln Sie das Wort `Hi` mit dem Schlüssel `Lo`, indem Sie Buchstabe für Buchstabe XOR-verknüpfen:
+
+$$\mathtt{H} \oplus \mathtt{L} = \underline{\phantom{0000}} \qquad \mathtt{i} \oplus \mathtt{o} = \underline{\phantom{0000}}$$
+
+Geben Sie das Ergebnis (den Chiffretext) in Hex an.
+:::
+
+## Warum ist XOR so praktisch?
+
+::: {.callout-note title="Aufgabe 18: Selbstumkehrung" icon=true}
+Nehmen Sie Ihr Ergebnis aus **Aufgabe 16a** (den Chiffretext) und XOR-en Sie es erneut mit $0101\,0110$.
+
+a) Welches Ergebnis erhalten Sie?
+b) Was bedeutet das für jemanden, der die Nachricht entschlüsseln will?
+:::
+
+XOR hat eine Eigenschaft, die es für die Kryptographie wie geschaffen macht: Wendet man **denselben Schlüssel zweimal** an, hebt sich die Wirkung auf.
+
+$$
+(p \oplus k) \oplus k = p
+$$
+
+Das bedeutet: **Verschlüsseln und Entschlüsseln sind dieselbe Operation.** Wer den Schlüssel $k$ kennt, XOR-t ihn einfach wieder auf den Chiffretext und erhält den Klartext zurück. Es braucht kein separates Entschlüsselungsverfahren.
+
+## Von einem Schlüssel zum Schlüsselstrom
+
+Ein Problem bleibt: Der Diffie-Hellman liefert **eine** Zahl $s$. Eine Nachricht ist aber viel länger. Wir brauchen für jedes Byte des Klartexts ein eigenes Schlüsselbyte — einen **Schlüsselstrom**.
+
+Die Idee:
+
+1. Alice und Bob handeln mit Diffie-Hellman den geheimen Schlüssel $s$ aus.
+2. Ein **Zahlengenerator** (für uns vorerst eine Black Box) benutzt $s$ als Startwert und erzeugt daraus eine beliebig lange Folge «zufälliger» Bytes — den Schlüsselstrom.
+3. Jedes Byte des Klartexts wird mit dem nächsten Byte des Schlüsselstroms **XOR-verknüpft**.
+
+```
+Klartext:        H    a    l    l    o
+                 ⊕    ⊕    ⊕    ⊕    ⊕
+Schlüsselstrom:  k₁   k₂   k₃   k₄   k₅
+               ─────────────────────────
+Chiffretext:     c₁   c₂   c₃   c₄   c₅
+```
+
+Weil beide denselben Startwert $s$ haben, erzeugt der Generator bei beiden **denselben** Schlüsselstrom. Bob XOR-t ihn wieder weg und liest die Nachricht.
+
+::: {.callout-tip title="Der rote Faden" icon=true}
+Das ist im Grunde **Vigenère** — nur in Binär: Statt einer Verschiebung modulo 26 verwenden wir XOR, und statt eines *kurzen, sich wiederholenden* Schlüsselworts einen Schlüsselstrom, der nie endet und sich nicht wiederholt. Genau die Wiederholung war beim Vigenère-Angriff die Schwachstelle.
+:::
+
+## Ausprobieren mit Python
+
+Das folgende Programm setzt die Idee um. `keystream` erzeugt aus dem Schlüssel (einer Zahl) den Schlüsselstrom, `xor` verknüpft zwei Byte-Folgen bitweise, und `encrypt` / `decrypt` setzen alles zusammen.
+
+```python
+import random
+
+def keystream(key: int, length: int) -> bytes:
+    """Erzeugt aus `key` deterministisch `length` Pseudo-Zufallsbytes."""
+    rng = random.Random(key)
+    return bytes(rng.getrandbits(8) for _ in range(length))
+
+
+def xor(a: bytes, b: bytes) -> bytes:
+    return bytes(x ^ y for x, y in zip(a, b))
+
+
+def encrypt(message, key) -> bytes:
+    ks = keystream(key, len(message))
+    ciphertext = xor(message, ks)
+    print("Klartext:       ", message.hex())
+    print("Schlüsselstrom: ", ks.hex())
+    print("Chiffretext:    ", ciphertext)
+    return ciphertext
+
+
+def decrypt(ciphertext, key) -> bytes:
+    ks = keystream(key, len(ciphertext))
+    message = xor(ciphertext, ks)
+    print("Chiffretext:    ", ciphertext.hex())
+    print("Schlüsselstrom: ", ks.hex())
+    print("Klartext:       ", message)
+    return message
+
+encrypt(b"Treffpunkt am Bahnhof", 1234)
+```
+
+**So benutzen Sie das Programm:**
+
+Wir verwenden die Online-IDE **WebTigerPython** — Sie müssen nichts installieren, alles läuft direkt im Browser.
+
+1. Öffnen Sie [https://webtigerpython.ethz.ch/](https://webtigerpython.ethz.ch/){target="_blank"}.
+2. **Kopieren** Sie den gesamten Code oben in das Editor-Feld (linke Seite). Damit sind die Funktionen `encrypt` und `decrypt` definiert.
+3. Fügen Sie **ganz unten** — nach den Funktionen — eine Zeile hinzu, die eine Nachricht verschlüsselt. Die Nachricht ist eine **Byte-Folge** (vorangestelltes `b`), der Schlüssel eine **Zahl**:
+
+   ```python
+   encrypt(b"Treffpunkt am Bahnhof", 1234)
+   ```
+
+4. Klicken Sie auf **Ausführen** (das ▶-Symbol). Im **Terminal** (unten) erscheinen Klartext, Schlüsselstrom und Chiffretext. Den ausgegebenen Chiffretext (`b'\x...'`) kopieren Sie für den nächsten Schritt.
+5. Zum **Entschlüsseln** ändern Sie nur die letzte Zeile: Ersetzen Sie `encrypt` durch `decrypt` und setzen Sie den kopierten Chiffretext ein. Führen Sie erneut aus — so prüfen Sie, ob Sie den Klartext zurückbekommen:
+
+   ```python
+   decrypt(b'\xd6\x89\xe4\xd9...', 1234)
+   ```
+
+::: {.callout-note title="Aufgabe 19: Nachrichten austauschen" icon=true}
+Bilden Sie Zweiergruppen und verwenden Sie als Schlüssel die **gemeinsame Zahl $s$**, die Sie in [Aufgabe 14](#aufgabe-14-selbst-durchführen) per Diffie-Hellman ausgehandelt haben.
+
+a) Verschlüsseln Sie eine kurze Nachricht mit `encrypt` und geben Sie nur den **Chiffretext** an Ihre Partnerin / Ihren Partner weiter.
+b) Entschlüsseln Sie die erhaltene Nachricht mit `decrypt` und demselben Schlüssel.
+c) Stimmt der Klartext? Diskutieren Sie: Könnte Charlie, der nur den Chiffretext sieht, die Nachricht lesen?
+:::
+
+::: {.callout-warning title="Aufgabe 20: Falscher Schlüssel" icon=true}
+Verschlüsseln Sie eine Nachricht mit dem Schlüssel `1234` und versuchen Sie dann, sie mit dem Schlüssel `1235` zu entschlüsseln.
+
+Was passiert? Wie viel vom Klartext können Sie erkennen?
+:::

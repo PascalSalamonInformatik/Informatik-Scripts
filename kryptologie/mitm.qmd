@@ -1,0 +1,113 @@
+---
+toc: true
+toc-location: right
+toc-depth: 3
+number-sections: true
+smooth-scroll: true
+format:
+  html: default
+  pdf:
+    documentclass: scrartcl
+    papersize: a4
+    fontsize: 11pt
+    number-sections: false
+    toc: false
+    lang: de
+    colorlinks: true
+    filters:
+      - remove_title.lua
+---
+
+# Wenn Charlie aktiv wird
+
+Halten wir kurz fest, wo wir stehen: Mit dem [Diffie-Hellman-Verfahren](#schlüsselaustauschproblem) einigen sich Alice und Bob über einen abgehörten Kanal auf einen gemeinsamen geheimen Schlüssel $s$. Mit der [XOR-Stromchiffre](#verschlüsseln-mit-xor) verschlüsseln sie damit ihre Nachrichten. Charlie sitzt am Kanal und liest mit — doch bisher war er **passiv**: Er konnte zuhören, aber nicht eingreifen. Gegen so einen Lauscher sind Alice und Bob jetzt gut geschützt.
+
+In der Realität läuft eine Nachricht aber über viele fremde Stationen, bevor sie ankommt: Router, WLAN-Hotspots, die Geräte des Internetanbieters. Was, wenn Charlie eine dieser Stationen kontrolliert — und nicht nur **mithört**, sondern jede Nachricht **abfangen, verändern und weiterleiten** kann?
+
+::: {.callout-note title="Aufgabe 21: Den normalen Ablauf zeichnen" icon=true}
+Bevor wir Charlie von der Leine lassen, halten wir fest, wie eine *ehrliche* Kommunikation aussieht.
+
+Zeichnen Sie auf Papier ein Diagramm mit **Alice links** und **Bob rechts**. Stellen Sie den vollständigen Ablauf dar — vom Schlüsselaustausch bis zur ersten verschlüsselten Nachricht. Ihr Diagramm sollte mindestens enthalten:
+
+<!-- - die öffentlichen Parameter $p$ und $g$,
+- die geheimen Zahlen $a$ (Alice) und $b$ (Bob),
+- die ausgetauschten öffentlichen Werte $A = g^a \bmod p$ und $B = g^b \bmod p$ (mit Pfeilen, wer was sendet),
+- den gemeinsamen Schlüssel $s$, den **beide** berechnen,
+- eine kurze Nachricht von Alice an Bob, die mit $s$ **XOR-verschlüsselt** übertragen wird. -->
+
+:::
+
+Stellen Sie sich nun vor, **jede** Nachricht zwischen Alice und Bob geht zwingend durch Charlie hindurch. Bisher hat er alles brav weitergeleitet. Jetzt will er mehr: die Nachrichten **mitlesen** (und vielleicht sogar verändern), ohne dass Alice oder Bob etwas merken.
+
+Eines steht fest: Den «echten» gemeinsamen Schlüssel von Alice und Bob kann Charlie **nicht** ausrechnen. Aus dem öffentlichen Wert $A$ den geheimen Exponenten $a$ zu bestimmen, ist das [Problem des diskreten Logarithmus](#einwegfunktionen-und-der-diskrete-logarithmus) — praktisch unlösbar. Ein direkter Angriff auf den Schlüssel ist also aussichtslos.
+
+Und trotzdem gibt es einen Weg.
+
+::: {.callout-note title="Aufgabe 22: Charlies Plan" icon=true}
+Charlie kann jede Nachricht abfangen, verändern und weiterleiten. Er muss den diskreten Logarithmus *nicht* knacken.
+
+Überlegen Sie in Zweiergruppen: **Wie könnte Charlie es anstellen, die verschlüsselten Nachrichten trotzdem im Klartext zu lesen — ohne dass Alice und Bob den Angriff bemerken?**
+
+Skizzieren Sie Ihre Idee in Stichworten, bevor Sie die Hinweise öffnen.
+
+::: {.callout-tip title="Hinweis 1" collapse=true icon=true}
+Charlie muss kein Geheimnis *knacken*. Er sitzt mitten in der Leitung — was hindert ihn daran, beim Schlüsselaustausch einfach **selbst mitzuspielen**, statt nur zuzuschauen?
+:::
+
+::: {.callout-tip title="Hinweis 2" collapse=true icon=true}
+Alice und Bob sehen nie ihr Gegenüber — sie sehen nur die **Zahlen**, die bei ihnen ankommen. Was, wenn Charlie gegenüber Alice **so tut, als wäre er Bob**, und gegenüber Bob **so tut, als wäre er Alice**?
+
+Wie viele Schlüssel handelt Charlie dann aus — und mit wem jeweils?
+:::
+:::
+<!-- 
+## Die Attacke
+
+::: {.callout-warning title="Aufgabe 23: Den Angriff zeichnen und benennen" icon=true}
+Zeichnen Sie Charlies Angriff in Ihr Diagramm aus **Aufgabe 21** ein. Charlie steht jetzt **in der Mitte**, zwischen Alice und Bob. Markieren Sie:
+
+- welche **geheime Zahl** Charlie selbst wählt,
+- die **zwei verschiedenen** gemeinsamen Schlüssel, die dabei entstehen — einen mit Alice, einen mit Bob,
+- wie eine Nachricht von Alice bei Bob ankommt: Charlie **entschlüsselt** sie, liest (oder verändert) sie und **verschlüsselt** sie neu, bevor er sie weiterschickt.
+
+**Recherchieren Sie anschliessend im Internet:** Wie heisst dieser Angriffstyp?
+:::
+
+Haben Sie den Angriff gefunden? Vergleichen Sie mit der Auflösung:
+
+::: {.callout-tip title="Auflösung: der Man-in-the-Middle-Angriff" collapse=true icon=true}
+Charlie führt **zwei getrennte Diffie-Hellman-Austausche** durch — einen mit Alice, einen mit Bob:
+
+- Fängt Alices Wert $A$ ab und schickt Bob stattdessen seinen **eigenen** Wert $C = g^c \bmod p$.
+- Fängt Bobs Wert $B$ ab und schickt Alice ebenfalls $C$ zurück.
+
+Dadurch entstehen **zwei** Schlüssel:
+
+- Alice und Charlie teilen $s_1 = g^{a \cdot c} \bmod p$,
+- Charlie und Bob teilen $s_2 = g^{b \cdot c} \bmod p$.
+
+Alice glaubt, mit Bob zu reden, und verschlüsselt mit $s_1$. Charlie **entschlüsselt** mit $s_1$, liest mit, verschlüsselt mit $s_2$ neu und schickt es an Bob — der es mit $s_2$ entschlüsselt. Keiner der beiden merkt etwas: Beide haben scheinbar eine sichere Leitung, in Wahrheit sitzt Charlie in der Mitte.
+
+```
+      Alice                     Charlie                      Bob
+   (geheim a)                  (geheim c)                 (geheim b)
+       │                           │                          │
+A=g^a  │ ──────►  abgefangen ✗     │                          │
+       │                  C=g^c ── │ ──────────────────────►  │
+       │                           │     abgefangen ✗  ◄────── │ B=g^b
+       │  ◄─────────────── C=g^c   │                          │
+       │                           │                          │
+ s₁ = C^a = g^(ac)        kennt s₁ UND s₂           s₂ = C^b = g^(bc)
+       │                           │                          │
+"Hallo"⊕s₁ ──►  entschlüsselt mit s₁  →  liest/ändert         │
+       │                  →  ⊕s₂ ───────────────►  ⊕s₂ → "Hallo"
+```
+
+Dieser Angriff heisst **Man-in-the-Middle-Angriff** (MITM, auf Deutsch *Mittelsmann-Angriff* oder *Janusangriff*).
+:::
+
+::: {.callout-caution title="Die Lücke im Diffie-Hellman-Verfahren" icon=true}
+Der Man-in-the-Middle-Angriff zeigt eine wichtige Lücke: Diffie-Hellman stellt sicher, **dass** niemand passiv mitlesen kann — aber **nicht**, mit **wem** man eigentlich spricht. Alice hat keine Möglichkeit zu prüfen, ob die Zahl, die bei ihr ankommt, wirklich von Bob stammt.
+
+Genau dieses Problem — die **Echtheit** des Gegenübers zu beweisen — muss im echten Internet zusätzlich gelöst werden. Wie das funktioniert, sehen Sie im nächsten Abschnitt.
+::: -->
