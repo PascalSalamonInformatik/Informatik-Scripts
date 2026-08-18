@@ -1,6 +1,6 @@
 ---
 title: "Informatik Skripte"
-subtitle: "Lehrmaterialien & Referenzen"
+subtitle: "Lehrmaterialien und Referenzen"
 toc: false
 ---
 
